@@ -1,5 +1,5 @@
 from typing import Optional, Union
-from protocol import pingServer
+from app.protocol import pingServer
 from starlette.responses import Response
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -61,9 +61,6 @@ def getServerIconBase64(ip: str, port: int) -> str:
 def getServerIcon(ip: str, port: int) -> bytes:
     return base64.b64decode(getServerIconBase64(ip, port))
 
-def main():
-    print(getServerIconBase64())
-
 
 @api.get("/", response_model=PingResponse)
 def ping(
@@ -87,7 +84,3 @@ def pingFavicon(
         return response
     except Exception:
         raise HTTPException(400, "Requested server timed out")
-
-
-if __name__ == "__main__":
-    main()
