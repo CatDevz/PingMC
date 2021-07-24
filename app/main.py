@@ -2,12 +2,21 @@ from typing import Optional, Union
 from app.protocol import pingServer
 from starlette.responses import Response
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 import base64
 
 
 api = FastAPI()
+
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # Pydantic models for API Documentation
